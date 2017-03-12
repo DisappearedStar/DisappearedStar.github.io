@@ -119,6 +119,7 @@ $(document).ready(function(){
       resizeContainerWidth(k);
       
       $("#map").attr("width", k*json["width"]).attr("height", k*json["height"]);
+      $(".legend-area").first().empty();
       
       for(var color in colors)
       {
