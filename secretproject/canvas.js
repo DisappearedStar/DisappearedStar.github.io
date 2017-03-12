@@ -2,7 +2,9 @@ var colors =
 {
   "rackColor": "#a7aaab",
   "passColor": "#d6d6c2",
-  "slctColor": "#ff6600"
+  "slctColor": "#ff6600",
+  "entrColor": "#b9db85",
+  "cashColor": "#ddac73",
 };
 var sizes = null;
 var context = null;
@@ -58,6 +60,16 @@ function colorMap(mapData, selectedGoods)
       if(Number(mapData.rows[row].cells[cell].toString()) == 0) 
       {
         fillCell(Number(row), Number(cell), colors.passColor);
+        continue;
+      }
+      else if(mapData.rows[row].cells[cell].toString() == "e") 
+      {
+        fillCell(Number(row), Number(cell), colors.entrColor);
+        continue;
+      }
+      else if(mapData.rows[row].cells[cell].toString() == "x") 
+      {
+        fillCell(Number(row), Number(cell), colors.cashColor);
         continue;
       }
       else if(selectedGoods.indexOf(mapData.rows[row].cells[cell].toString()) != -1)
