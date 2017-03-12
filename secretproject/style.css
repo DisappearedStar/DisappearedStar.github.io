@@ -3,7 +3,6 @@
   width: 80%;
   margin: 0 auto;
   padding: 10px;
-  min-height:500px;
 }
 #run
 {
@@ -11,6 +10,7 @@
   text-align:center;
   padding:5px;
   margin:15px;
+  background: #98d7ea;
 }
 #run:hover
 {
@@ -41,10 +41,11 @@ body
 .center
 {
   text-align:center;
+  margin: 0 auto;
 }
 h1,h2,h3,h4,h5,h6
 {
-    text-align:center;
+    text-align:left;
     margin-top:5px;
     margin-bottom:5px;
 }
@@ -52,17 +53,31 @@ h1,h2,h3,h4,h5,h6
 {
   display:none;
 }
-.goods-wrapper
+.app-area-wrapper
 {
   text-align: left;
-  width: 95%;
+  width: 80%;
   margin: 0 auto;
   background: #ddd;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  position; relative;
+  min-height:80vh;
+  /*overflow: hidden;*/
 }
+
+.user-choice-area
+{
+  float: left;
+  min-width:300px;
+}
+
+.map-area
+{
+  float: right;
+  /*width:79%;*/
+}
+
 .noselect {
   -webkit-touch-callout: none;
     -webkit-user-select: none;

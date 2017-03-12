@@ -35,10 +35,11 @@ $(document).ready(function(){
         $(".goods-items").last().append($("<br />"));
       }
     }
+    resizeContainer();
   });
 
   $(document).on('click', '.h5', function () {
-		$(this).next().next().slideToggle("slow").siblings("p:visible").slideUp("slow");
+		$(this).next().next().slideToggle("slow").siblings("p:visible").slideUp("slow", function() {resizeContainer();});
 		$(this).toggleClass("active");
 		$(this).siblings(".h5").removeClass("active");
 	});  
@@ -53,6 +54,7 @@ $(document).ready(function(){
   });
   
   cityEl.change(function() {
+    
     if(!$("#address").parent().hasClass("hidden"))
     {
       $("#address").parent().addClass("hidden");
@@ -73,7 +75,7 @@ $(document).ready(function(){
       shopEl.append($("<option />").val(shop).text(shop));
     }
     shopEl.attr('selectedIndex', 0);    
-    
+    resizeContainer();
   });
   
   shopEl.change(function() {
@@ -93,7 +95,7 @@ $(document).ready(function(){
       addressEl.append($("<option />").val(address).text(address));
     }
     addressEl.attr('selectedIndex', 0);    
-    
+    resizeContainer();
   });  
   
   addressEl.change(function() {
@@ -102,6 +104,7 @@ $(document).ready(function(){
     {
       $("#map").parent().addClass("hidden");
     }
+    resizeContainer();
   });
   
   runEl.click(function() 
@@ -113,6 +116,7 @@ $(document).ready(function(){
     { return this.value; }).get();
     $.getJSON(u, function (json) {
       map = json;
+      resizeContainerWidth(k);
       $("#map").parent().removeClass("hidden");
       $("#map").attr("width", k*json["width"]).attr("height", k*json["height"]);
       init(json, values, k);
@@ -128,6 +132,16 @@ $(document).ready(function(){
     createTooltip(x, y, goods);    
     //alert(x + ' ' + y);
   });
+  
+  function resizeContainer() {
+    console.log("in resize");
+    $(".app-area-wrapper").css("height", $(".user-choice-area").height());
+  }
+  function resizeContainerWidth(k) {
+    console.log("in resizeWidth");
+    var l = $(".user-choice-area").width() + k*map["width"] + 10;
+    $(".app-area-wrapper").css("width", l);
+  }
 })
 
 

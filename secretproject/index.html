@@ -9,40 +9,47 @@
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://disappearedstar.github.io/secretproject/canvas.js"></script>
   <script src="https://disappearedstar.github.io/secretproject/scripts.js"></script>
+  <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+  <!--<script src="scripts.js"></script>-->
+  <!--<script src="canvas.js"></script>-->
 </head>
 <body>
   <div id="wrapper">
-    <h2 class="header">Полки — покажем, куда идти в гипермаркете!</h2>
+    <h2 class="header center">Полки — покажем, куда идти в гипермаркете!</h2>
+    <div class="app-area-wrapper">
+    <div class="user-choice-area">
     <form>
-    <div class="goods-wrapper">
       <h3>Что покупаем?</h3>
       <div id="goods">
       </div>
     
-    <div class="center">
+    <div>
       <h3>Где я?</h3>
       <select size="1" id="city" name="city">
         <option disabled selected value=""></option>
       </select>
     </div>
-    <div class="center hidden">
+    <div class="hidden">
       <h3>Какой магазин?</h3>
       <select size="1" id="shop" name="shop">
       </select>
     </div>
-    <div class="center hidden">
+    <div class="hidden">
       <h3>Какой адрес?</h3>
       <select size="1" id="address" name="address">
       </select>
     </div>
-    <div class="center run noselect hidden">
+    <div class="run noselect hidden">
       <span id="run">Нарисовать</span>
     </div>
     </form>
+    </div>
+    <div class="map-area">
     <div class="center hidden">
       <canvas id="map"><canvas>
     </div>
     <div class="hidden" id="tooltip"></div>
+    </div>
     </div>
   </div>
 </body>
