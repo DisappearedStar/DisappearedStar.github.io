@@ -1,6 +1,6 @@
 var colors = 
 {
-  "rackColor": "#a7aaab",
+  "rackColor": "#a8a8a8",
   "passColor": "#d6d6c2",
   "slctColor": "#ff6600",
   "entrColor": "#b9db85",
@@ -26,11 +26,12 @@ function init(map, goods, k)
 
 function drawMap()
 {
+  context.shadowColor = "#fff";
   context.shadowOffsetX = 0; 
   context.shadowOffsetY = 0;
   context.shadowBlur = 0;
   context.fillStyle = "#fff";
-  context.fillRect(0, 0, sizes.width, sizes.height);
+  context.clearRect(0, 0, sizes.width, sizes.height);
   drawGrid();
   colorMap(mapData, selectedGoods);
 }
@@ -47,7 +48,7 @@ function drawGrid()
     context.lineTo(sizes.width, y);
   }
   
-  context.strokeStyle = "#666869";
+  context.strokeStyle = "#e5e5de";
   context.stroke();
 }
 
@@ -89,7 +90,7 @@ function colorMap(mapData, selectedGoods)
 function fillCell(x, y, color)
 {
   context.fillStyle = color;
-  context.fillRect(sizes.width+2-(sizes.step * (x+1)), sizes.height+2-(sizes.step * (y+1)), sizes.step - 3, sizes.step - 3);
+  context.fillRect(sizes.width+1-(sizes.step * (x+1)), sizes.height+1-(sizes.step * (y+1)), sizes.step - 2, sizes.step - 2);
 }
 
 function createTooltip(x, y, goods)
@@ -126,7 +127,13 @@ function createTooltip(x, y, goods)
           wrapText(txt, xx+5, yy+5, 100, 20);
           context.shadowOffsetX = -1; 
           context.shadowOffsetY = -1; 
-          wrapText(txt, xx+5, yy+5, 100, 20);          
+          wrapText(txt, xx+5, yy+5, 100, 20); 
+          context.shadowOffsetX = -1; 
+          context.shadowOffsetY = 1; 
+          wrapText(txt, xx+5, yy+5, 100, 20); 
+          context.shadowOffsetX = 1; 
+          context.shadowOffsetY = -1; 
+          wrapText(txt, xx+5, yy+5, 100, 20);           
 
         }
       }
