@@ -22,7 +22,7 @@ $(document).ready(function(){
     console.log(data.city["Новосибирск"].shops["Лента"]);
   }*/
   
-  $.getJSON('https://disappearedstar.github.io/secretproject/goods-new.json', function (json) {
+  $.getJSON('goods-new.json', function (json) {
     goods = json;
     for(var category in goods["goods"])
     {
@@ -44,7 +44,39 @@ $(document).ready(function(){
 		$(this).siblings(".h5").removeClass("active");
 	});  
   
-  $.getJSON('https://disappearedstar.github.io/secretproject/shops.json', function (json) {
+  $(document).on('click', '.my-list', function () {
+		$("#goods").toggleClass("hidden", true);
+    $("#my").toggleClass("hidden", false);
+    $(".my-list").css('background', '#a6d8ec');
+    $(".goods-list").css('background', '');
+    $("#my").empty();
+    $('input:checkbox:checked.cb-goods').map(function (o, i) 
+    {
+      $("#my").append('<span id="cg' + this.value +'">' + getGoodNameById(this.value)+'</span><span class="delete-good noselect"></span><br>');
+    });
+    
+    
+    /*$(this).next().next().slideToggle("slow").siblings("p:visible").slideUp("slow", function() {resizeContainer();});
+		$(this).toggleClass("active");
+		$(this).siblings(".h5").removeClass("active");*/
+	});
+  
+  $(document).on('click', '.goods-list', function () {
+    $("#my").toggleClass("hidden", true);
+		$("#goods").toggleClass("hidden", false);
+    $(".goods-list").css('background', '#a6d8ec');
+    $(".my-list").css('background', '');
+	});
+  
+  $(document).on('click', '.delete-good', function () {
+    var id = $(this).prev("span").attr('id').slice(2);
+    $(this).prev("span").remove();
+    $(this).next("br").remove();
+    $("#cb"+id).prop('checked', false);
+    $(this).remove();
+	});
+  
+  $.getJSON('shops.json', function (json) {
     data = json;
     for (var city in data.city)
     {
@@ -161,6 +193,17 @@ $(document).ready(function(){
     console.log("in resizeWidth");
     var l = $(".user-choice-area").width() + k*map["width"] + 10;
     $(".app-area-wrapper").css("width", l);
+  }
+  function getGoodNameById(id)
+  {
+    for(var category in goods["goods"])
+    {
+      for(var good in goods["goods"][category])
+      {
+        if(Number(good) == Number(id))
+          return goods["goods"][category][good];
+      }
+    }
   }
 })
 

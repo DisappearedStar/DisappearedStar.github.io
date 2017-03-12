@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Полки</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link rel="shortcut icon" href="fav.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <!--<link rel="stylesheet" type="text/css" href="https://disappearedstar.github.io/secretproject/style.css">
@@ -15,12 +16,17 @@
 </head>
 <body>
   <div id="wrapper">
-    <h2 class="header center">Полки — покажем, куда идти в гипермаркете!</h2>
+    <span class="header center">Полки — покажем, куда идти в гипермаркете!</span>
     <div class="app-area-wrapper">
     <div class="user-choice-area">
     <form>
-      <h3>Что покупаем?</h3>
+      <span class="mylist-wrapper">
+        <h3 class="goods-list noselect">Что покупаем?</h3>
+        <h3 class="my-list noselect">Мой список</h3>
+      </span>
       <div id="goods">
+      </div>
+      <div id="my" class="hidden">
       </div>
     
     <div>

@@ -3,6 +3,7 @@
   width: 80%;
   margin: 0 auto;
   padding: 10px;
+  /*border: 1px solid black;*/
 }
 #run
 {
@@ -34,7 +35,11 @@ body
 }
 .header
 {
+  /*border: 1px solid black;*/
+  width: 100%;
+  display: inline-block;
   font-weight: bold;
+  font-size: 1.5em;
   color: #fff;
   text-shadow: #000 1px 1px 0, #000 -1px -1px 0, #000 -1px 1px 0, #000 1px -1px 0;
 }
@@ -48,6 +53,68 @@ h1,h2,h3,h4,h5,h6
     text-align:left;
     margin-top:5px;
     margin-bottom:5px;
+}
+.mylist-wrapper
+{
+  display:inline-block;
+  min-width:250px;
+  /*border: 1px solid black;*/
+}
+.goods-list
+{
+  float:left;
+  /*background-color: #a6d8ec;*/
+}
+.my-list
+{
+  float:right;
+}
+
+.my-list:before
+{
+  background-image: url(icon20.png);
+}
+.goods-list:before
+{
+  background-image: url(cart.png);
+}
+
+.my-list:hover, .goods-list:hover
+{
+	background-color: #bfe3f2;
+}
+.my-list, .goods-list
+{
+  padding:3px 9px 3px 3px;
+  border-radius: 7px;
+  cursor:pointer;
+}
+
+.goods-list:before, .my-list:before
+{
+  content:"";
+  background-repeat:no-repeat;
+  width: 20px;
+  height: 20px;
+  float: left;
+}
+
+.mylist-wrapper > h3
+{
+  display:inline;
+}
+
+.delete-good
+{
+  background-image: url(del.png);
+  background-repeat:no-repeat;
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0px;
+  margin-left:5px;
+  display:inline-block;
+  cursor:pointer;
+  vertical-align:middle;
 }
 .hidden
 {
@@ -69,7 +136,7 @@ h1,h2,h3,h4,h5,h6
 .user-choice-area
 {
   float: left;
-  min-width:300px;
+  min-width:250px;
   /*border: 1px solid black;*/
 }
 

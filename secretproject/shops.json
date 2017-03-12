@@ -7,47 +7,47 @@
       {
         "Лента":
         {
-          "Бердское ш., д. 2": "lenta/berdskoe.json",
-          "Большевистская ул., д. 52/1": "lenta/bolshevist.json",
-          "Гусинобродское ш., д. 64": "lenta/gusinka.json",
-          "Кирзаводская ул., д. 1A": "lenta/kirzavod.json",
-          "Мясниковой ул., д. 29": "lenta/myasnikova.json",
-          "Петухова ул., д. 73": "lenta/petuhova.json",
-          "Энергетиков пр-д, д. 9": "lenta/energetikov.json"
+          "на Бердском шоссе": "lenta/berdskoe.json",
+          "на Большевистской": "lenta/bolshevist.json",
+          "на Гусинобродском шоссе": "lenta/gusinka.json",
+          "на Кирзаводской": "lenta/kirzavod.json",
+          "на Мясникова": "lenta/myasnikova.json",
+          "на Петухова": "lenta/petuhova.json",
+          "на Энергетиков": "lenta/energetikov.json"
         },
         "Ашан":
         {
-          "ул. Ватутина, 107, Мега": "ashan/mega.json",
-          "ул. Курчатова, д. 1, Голден Парк": "ashan/goldenpark.json",
-          "ул. Фрунзе, д. 238, Сибирский Молл": "ashan/sibmoll.json"
+          "в МЕГА": "ashan/mega.json",
+          "в Голден Парке": "ashan/goldenpark.json",
+          "в Сибирском Молле": "ashan/sibmoll.json"
         },
         "Гигант":
         {
-          "п-д Энергетиков 8": "gigant/energetikov.json",
-          "ул.Автогенная 126": "gigant/avtogennaya.json"
+          "на Энергетиков": "gigant/energetikov.json",
+          "на Автогенной": "gigant/avtogennaya.json"
         },
         "Окей":
         {
-          "ул. Дуси Ковальчук, 1/1, ТЦ «Малинка»": "okey/malinka.json",
-          "ул. Военная, 5, ТРЦ «Аура»": "okey/aura.json"
+          "в ТЦ «Малинка»": "okey/malinka.json",
+          "в ТРЦ «Аура»": "okey/aura.json"
         },
         "Быстроном":
         {
-          "ул. Никитина, 114": "bystronom/nikitina.json",
-          "ул. Островского, 200": "bystronom/ostrovskogo.json",
-          "ул. Пермитина, 24": "bystronom/permitina.json",
-          "Степная, 25": "bystronom/stepnaya.json",
-          "Тюменская, 2": "bystronom/tyumenskaya.json",
-          "Линейная, 114": "bystronom/lineynaya.json",
-          "пл. Маркса, 3 (ТЦ Версаль)": "bystronom/versal.json",
-          "ул. Немировича-Данченко, 145/2": "bystronom/ndanchenko.json",
-          "ул. Инженерная, 5/1": "bystronom/inzhenernaya.json"
+          "на Никитина": "bystronom/nikitina.json",
+          "на Островского": "bystronom/ostrovskogo.json",
+          "на Пермитина": "bystronom/permitina.json",
+          "на Степной": "bystronom/stepnaya.json",
+          "на Тюменской": "bystronom/tyumenskaya.json",
+          "на Линейной": "bystronom/lineynaya.json",
+          "в ТЦ Версаль": "bystronom/versal.json",
+          "на Немировича-Данченко": "bystronom/ndanchenko.json",
+          "на Инженерной": "bystronom/inzhenernaya.json"
         },
         "Метро":
         {
-          "Северный проезд 3а": "metro/sevproezd.json",
-          "ул. Большевистская 290": "metro/bolshevist.json",
-          "Северная 11": "metro/severnaya.json"
+          "на Северном проезде": "metro/sevproezd.json",
+          "на Большевистской": "metro/bolshevist.json",
+          "на Северной": "metro/severnaya.json"
         }
       }
     },
