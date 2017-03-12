@@ -1,10 +1,10 @@
 var colors = 
 {
-  "rackColor": "#a8a8a8",
-  "passColor": "#d6d6c2",
-  "slctColor": "#ff6600",
-  "entrColor": "#b9db85",
-  "cashColor": "#ddac73",
+  "rackColor": {"code":"#a8a8a8", "name": "Товарный ряд"},
+  "passColor": {"code":"#d6d6c2", "name": "Проход между рядами"},
+  "slctColor": {"code":"#ff6600", "name": "Выбранный товар"},
+  "entrColor": {"code":"#b9db85", "name": "Вход в магазин"},
+  "cashColor": {"code":"#ddac73", "name": "Касса"}
 };
 var sizes = null;
 var context = null;
@@ -60,27 +60,27 @@ function colorMap(mapData, selectedGoods)
     {
       if(Number(mapData.rows[row].cells[cell].toString()) == 0) 
       {
-        fillCell(Number(row), Number(cell), colors.passColor);
+        fillCell(Number(row), Number(cell), colors.passColor.code);
         continue;
       }
       else if(mapData.rows[row].cells[cell].toString() == "e") 
       {
-        fillCell(Number(row), Number(cell), colors.entrColor);
+        fillCell(Number(row), Number(cell), colors.entrColor.code);
         continue;
       }
       else if(mapData.rows[row].cells[cell].toString() == "x") 
       {
-        fillCell(Number(row), Number(cell), colors.cashColor);
+        fillCell(Number(row), Number(cell), colors.cashColor.code);
         continue;
       }
       else if(selectedGoods.indexOf(mapData.rows[row].cells[cell].toString()) != -1)
       {
-        fillCell(Number(row), Number(cell), colors.slctColor);
+        fillCell(Number(row), Number(cell), colors.slctColor.code);
         continue;
       }
       else//(selectedGoods.indexOf(mapData.rows[row].cells[cell].toString()) == -1)
       {
-        fillCell(Number(row), Number(cell), colors.rackColor);
+        fillCell(Number(row), Number(cell), colors.rackColor.code);
         continue;
       }
     }

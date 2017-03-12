@@ -70,12 +70,20 @@ h1,h2,h3,h4,h5,h6
 {
   float: left;
   min-width:300px;
+  /*border: 1px solid black;*/
 }
 
 .map-area
 {
   float: right;
   /*width:79%;*/
+}
+
+.legend-area
+{
+  float: left;
+  /*border: 1px solid #636060;*/
+  padding: 5px;
 }
 
 .noselect {
@@ -86,7 +94,14 @@ h1,h2,h3,h4,h5,h6
         -ms-user-select: none;
             user-select: none;                             
 }
-
+.legend-el
+{
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #e5e5de;
+  border-radius: 3px;
+  background: #bbccdd;
+}
 
 .h5 {
 	cursor: pointer;

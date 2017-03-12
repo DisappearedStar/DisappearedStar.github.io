@@ -117,8 +117,17 @@ $(document).ready(function(){
     $.getJSON(u, function (json) {
       map = json;
       resizeContainerWidth(k);
-      $("#map").parent().removeClass("hidden");
+      
       $("#map").attr("width", k*json["width"]).attr("height", k*json["height"]);
+      
+      for(var color in colors)
+      {
+        $(".legend-area").first().append("<span class='legend-el noselect'>" + colors[color].name + "<span>");
+        $(".legend-el").last().css('background', colors[color].code);
+      }
+      $(".legend-area").first().removeClass("hidden");
+      $("#map").parent().removeClass("hidden");
+      resizeContainer();
       init(json, values, k);
     });
   });
@@ -135,7 +144,17 @@ $(document).ready(function(){
   
   function resizeContainer() {
     console.log("in resize");
-    $(".app-area-wrapper").css("height", $(".user-choice-area").height());
+    var l = $(".user-choice-area").height();
+    var r = $(".map-area").height() + $(".legend-area").height() + 5;
+    if(l<r) 
+    {
+      $(".app-area-wrapper").css("height", r);
+      $(".user-choice-area").css("height", r+5);
+    }
+    else
+    {
+      $(".app-area-wrapper").css("height", l);
+    }
   }
   function resizeContainerWidth(k) {
     console.log("in resizeWidth");
