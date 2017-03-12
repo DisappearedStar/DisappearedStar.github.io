@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Полки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="canvas.js"></script>
+  <script src="scripts.js"></script>
+</head>
+<body>
+  <div id="wrapper">
+    <h2 class="header">Полки — покажем, куда идти в гипермаркете!</h2>
+    <form>
+    <div class="goods-wrapper">
+      <h3>Что покупаем?</h3>
+      <div id="goods">
+      </div>
+    
+    <div class="center">
+      <h3>Где я?</h3>
+      <select size="1" id="city" name="city">
+        <option disabled selected value=""></option>
+      </select>
+    </div>
+    <div class="center hidden">
+      <h3>Какой магазин?</h3>
+      <select size="1" id="shop" name="shop">
+      </select>
+    </div>
+    <div class="center hidden">
+      <h3>Какой адрес?</h3>
+      <select size="1" id="address" name="address">
+      </select>
+    </div>
+    <div class="center run noselect hidden">
+      <span id="run">Нарисовать</span>
+    </div>
+    </form>
+    <div class="center hidden">
+      <canvas id="map"><canvas>
+    </div>
+    <div class="hidden" id="tooltip"></div>
+    </div>
+  </div>
+</body>
+</html>

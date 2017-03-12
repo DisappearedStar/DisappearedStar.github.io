@@ -1,0 +1,56 @@
+{
+  "city": 
+  {
+    "Новосибирск":
+    {
+      "shops":
+      {
+        "Лента":
+        {
+          "Бердское ш., д. 2": "lenta/berdskoe.json",
+          "Большевистская ул., д. 52/1": "lenta/bolshevist.json",
+          "Гусинобродское ш., д. 64": "lenta/gusinka.json",
+          "Кирзаводская ул., д. 1A": "lenta/kirzavod.json",
+          "Мясниковой ул., д. 29": "lenta/myasnikova.json",
+          "Петухова ул., д. 73": "lenta/petuhova.json",
+          "Энергетиков пр-д, д. 9": "lenta/energetikov.json"
+        },
+        "Ашан":
+        {
+          "ул. Ватутина, 107, Мега": "ashan/mega.json",
+          "ул. Курчатова, д. 1, Голден Парк": "ashan/goldenpark.json",
+          "ул. Фрунзе, д. 238, Сибирский Молл": "ashan/sibmoll.json"
+        },
+        "Гигант":
+        {
+          "п-д Энергетиков 8": "gigant/energetikov.json",
+          "ул.Автогенная 126": "gigant/avtogennaya.json"
+        },
+        "Окей":
+        {
+          "ул. Дуси Ковальчук, 1/1, ТЦ «Малинка»": "okey/malinka.json",
+          "ул. Военная, 5, ТРЦ «Аура»": "okey/aura.json"
+        },
+        "Быстроном":
+        {
+          "ул. Никитина, 114": "bystronom/nikitina.json",
+          "ул. Островского, 200": "bystronom/ostrovskogo.json",
+          "ул. Пермитина, 24": "bystronom/permitina.json",
+          "Степная, 25": "bystronom/stepnaya.json",
+          "Тюменская, 2": "bystronom/tyumenskaya.json",
+          "Линейная, 114": "bystronom/lineynaya.json",
+          "пл. Маркса, 3 (ТЦ Версаль)": "bystronom/versal.json",
+          "ул. Немировича-Данченко, 145/2": "bystronom/ndanchenko.json",
+          "ул. Инженерная, 5/1": "bystronom/inzhenernaya.json"
+        },
+        "Метро":
+        {
+          "Северный проезд 3а": "metro/sevproezd.json",
+          "ул. Большевистская 290": "metro/bolshevist.json",
+          "Северная 11": "metro/severnaya.json"
+        }
+      }
+    },
+    "Test city": "test"
+  }
+}
