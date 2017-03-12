@@ -22,7 +22,7 @@ $(document).ready(function(){
     console.log(data.city["Новосибирск"].shops["Лента"]);
   }*/
   
-  $.getJSON('goods-new.json', function (json) {
+  $.getJSON('https://disappearedstar.github.io/secretproject/goods-new.json', function (json) {
     goods = json;
     for(var category in goods["goods"])
     {
@@ -43,7 +43,7 @@ $(document).ready(function(){
 		$(this).siblings(".h5").removeClass("active");
 	});  
   
-  $.getJSON('shops.json', function (json) {
+  $.getJSON('https://disappearedstar.github.io/secretproject/shops.json', function (json) {
     data = json;
     for (var city in data.city)
     {
