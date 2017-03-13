@@ -55,11 +55,6 @@ $(document).ready(function(){
     {
       $("#my").append('<span id="cg' + this.value +'">' + getGoodNameById(this.value)+'</span><span class="delete-good noselect"></span><br>');
     });
-    
-    
-    /*$(this).next().next().slideToggle("slow").siblings("p:visible").slideUp("slow", function() {resizeContainer();});
-		$(this).toggleClass("active");
-		$(this).siblings(".h5").removeClass("active");*/
 	});
   
   $(document).on('click', '.goods-list', function () {
@@ -74,24 +69,112 @@ $(document).ready(function(){
     $("#cb"+id).prop('checked', false);
     var br = $(this).next("br");
     $(this).prev("span").fadeOut();
-    $(this).fadeOut(function(){br.remove();});
+    $(this).fadeOut(function(){br.remove();redrawMap();});
 	});
+  
+  $(document).on('click', '.save-button', function () {
+    if(getCheckedGoodsIds().length)
+    {
+      $('#overlay').fadeIn(400,	function()
+      {
+        makeModalWindow("save");
+      });
+    }
+	});
+  
+  $(document).on('click', '.load-button', function () {
+      $('#overlay').fadeIn(400,	function()
+      {
+        makeModalWindow("load");
+        //$('#modal_form').css('display', 'block').animate({opacity: 1, top: '50%'}, 200);
+      });
+	});
+  
+  $(document).on('click', '#lists-clear', function () {
+    if($.cookie("names"))
+    {
+      var names = $.parseJSON($.cookie("names"));
+      names.map(function(name){
+        $.cookie(name, '');
+      });
+      $.cookie("names", '');
+      $("#my-saved-lists").empty();
+    }
+	});
+  
+  $(document).on('click', '.modal-save', function () {
+    var name = $("#list-name-input").val();
+    if(name && (name != 'null'))
+    {
+      console.log("77");
+      if(!($.cookie("names")) || ($.cookie("names") == 'null'))
+      {
+        console.log("69");
+        $.cookie("names", JSON.stringify([name]), {expires:999});
+      }
+      var names = $.parseJSON($.cookie("names"));
+      if(names.length >= 10)
+      {
+        $(".modal-result").append("Нельзя сохранить больше 10 списков").css("color", "red").fadeIn(500, modal_close);
+      }
+      else
+      {
+        if(names.indexOf(name) == -1)
+        {
+          names.push(name);
+        }
+        var values = getCheckedGoodsIds();
+        $.cookie(name, JSON.stringify(values), {expires:999});
+        $.cookie("names", JSON.stringify(names), {expires:999});
+        $(".modal-result").append("Сохранено").css("color", "green").fadeIn(500, modal_close);
+      }
+    }
+	});
+  
+  $(document).on('click', '.modal-load', function () {
+    var ids = $.parseJSON($.cookie($("#my-saved-lists option:selected").text()));
+    console.log(ids);
+    ids.map(function(id){
+      $("#cb"+id).prop('checked', true);
+    });
+    $(".modal-result").append("Загружено").css("color", "green").fadeIn(500, modal_close);
+    $(".my-list").trigger("click");
+    redrawMap();
+	});
+  
+  $(document).on('click', '#modal_close, #overlay', modal_close);
+  
+  function modal_close()
+  {
+    $(".modal-result").fadeOut(600, function(){
+      $(".modal-result").empty();
+      $(".modal-submit").remove();
+      $(".margin-wrap").prev().empty();
+      //$("#list-name-input").val('');
+      $('.modal').animate({opacity: 0, top: '45%'}, 200,	function()
+      {
+        $(this).css('display', 'none');
+        $('#overlay').fadeOut(400);
+      });
+    });
+    //$(".modal").attr('id', '');
+  }
   
   $(document).on('click', '.clear-selection-button', function () {
     $('input:checkbox:checked.cb-goods').map(function () 
     { $(this).prop('checked', false); });
+    if(!$("#map").parent().hasClass("hidden"))
+    {
+      redrawMap();      
+    } 
     $("#my").empty();
-	});
+	});  
   
-  //$('input:checkbox.cb-goods').change(function() {
   $(document).on('change', ':checkbox.cb-goods', function () {
     console.log("ya tut");
     if(!$("#map").parent().hasClass("hidden"))
     {
-      selectedGoods = $('input:checkbox:checked.cb-goods').map(function () 
-      { return this.value; }).get();
-      drawMap();      
-      
+      redrawMap();      
     } 
   });
   
@@ -164,8 +247,7 @@ $(document).ready(function(){
     var k = 30;
     var u = data.city[$("#city option:selected").text()].shops[$("#shop option:selected").text()][$("#address option:selected").text()];
     
-    var values = $('input:checkbox:checked.cb-goods').map(function () 
-    { return this.value; }).get();
+    var values = getCheckedGoodsIds();
     $.getJSON(u, function (json) {
       map = json;
       resizeContainerWidth(k);
@@ -192,13 +274,12 @@ $(document).ready(function(){
         x = event.pageX - canvas.offsetLeft,
         y = event.pageY - canvas.offsetTop;
     createTooltip(x, y, goods);    
-    //alert(x + ' ' + y);
   });
   
   function resizeContainer() {
     console.log("in resize");
     var m = $(".app-area-wrapper").height();
-    var l = $(".user-choice-area").height();
+    var l = $(".user-choice-area").height() + 10;
     var r = $(".map-area").height() + $(".legend-area").height() + 40;
     if(l>=m) 
     {
@@ -231,6 +312,51 @@ $(document).ready(function(){
           return goods["goods"][category][good];
       }
     }
+  }
+  
+  function redrawMap()
+  {
+    selectedGoods = $('input:checkbox:checked.cb-goods').map(function () 
+      { return this.value; }).get();
+    drawMap();
+  }
+  function getCheckedGoodsIds()
+  {
+    return $('input:checkbox:checked.cb-goods').map(function(){return this.value;}).get();
+  }
+  
+  function makeModalWindow(type)
+  {
+    console.log("make windows");
+    if(type == "save")
+    {
+      $(".modal").attr('id', 'modal_form');
+      $("#modal_close").next().append('Введите название списка:<input id="list-name-input" type="text" size="20" maxlength="20">');
+      $(".margin-wrap").prepend('<span class="modal-save modal-submit noselect">Сохранить</span>');
+    }
+    if(type == "load")
+    {
+      $(".modal").attr('id', 'load_form');
+      var names = null;
+      if(($.cookie("names")) && ($.cookie("names") != null) && ($.cookie("names") != 'null'))
+      {
+        console.log("1234");
+        names = $.parseJSON($.cookie("names"));
+        console.log(names);
+        $("#modal_close").next().append('Выберите список:<br clear="all"><select size="1" id="my-saved-lists" name="my-saved-lists"></select><span id="lists-clear"></span>');
+        $("#my-saved-lists").append($("<option />").val("").attr("selected", true).attr("disabled", true));
+        names.map(function(name){
+          $("#my-saved-lists").append($("<option />").val(name).text(name));
+        });
+        $(".margin-wrap").prepend('<span class="modal-load modal-submit noselect">Загрузить</span>');
+      }
+      else
+      {
+        console.log("5555");
+        $(".modal-result").append('У вас нет списков').css("color", "red").fadeIn(500, modal_close);
+      }
+    }
+    $(".modal").css('display', 'block').animate({opacity: 1, top: '50%'}, 200);
   }
 })
 

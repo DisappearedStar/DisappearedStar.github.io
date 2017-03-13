@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="fav.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <!--<link rel="stylesheet" type="text/css" href="https://disappearedstar.github.io/secretproject/style.css">
   <script src="https://disappearedstar.github.io/secretproject/canvas.js"></script>
   <script src="https://disappearedstar.github.io/secretproject/scripts.js"></script>-->
@@ -21,15 +22,19 @@
     <div class="user-choice-area">
     <form>
       <!--<span class="mylist-wrapper">-->
-        <span class="goods-list noselect">Что покупаем?</span>
-        <span class="my-list noselect">Мой список</span>
+        <span class="top-button goods-list noselect">Товары</span>
+        <span class="top-button my-list noselect">Мой список</span>
       <!--</span>-->
       <div id="goods">
       </div>
       <div id="my" class="hidden">
       </div>
       
-    <span class="clear-selection-button noselect">Очистить</span><br clear="all">
+    <span class="top-button clear-selection-button noselect">Очистить</span>
+    <span class="top-button save-button noselect">Сохранить</span>
+    <br clear="all">
+    <span class="top-button load-button noselect">Загрузить</span>
+    <br clear="all">
     <div>
       <h3>Где я?</h3>
       <select size="1" id="city" name="city">
@@ -60,5 +65,16 @@
     </div>
     </div>
   <!--</div>-->
+  
+    <div class="modal"> 
+      <span id="modal_close" class="noselect">X</span>
+      <form>
+      </form>
+      <div class="margin-wrap">
+        <span class="modal-result"></span>
+      </div>
+    </div>
+    <div id="overlay"></div>
+  
 </body>
 </html>
