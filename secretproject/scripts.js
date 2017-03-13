@@ -39,6 +39,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.h5', function () {
+    console.log("clickk");
 		$(this).next().next().slideToggle("slow").siblings("p:visible").slideUp("slow", function() {resizeContainer();});
 		$(this).toggleClass("active");
 		$(this).siblings(".h5").removeClass("active");
@@ -70,11 +71,30 @@ $(document).ready(function(){
   
   $(document).on('click', '.delete-good', function () {
     var id = $(this).prev("span").attr('id').slice(2);
-    $(this).prev("span").remove();
-    $(this).next("br").remove();
     $("#cb"+id).prop('checked', false);
-    $(this).remove();
+    var br = $(this).next("br");
+    $(this).prev("span").fadeOut();
+    $(this).fadeOut(function(){br.remove();});
 	});
+  
+  $(document).on('click', '.clear-selection-button', function () {
+    $('input:checkbox:checked.cb-goods').map(function () 
+    { $(this).prop('checked', false); });
+    $("#my").empty();
+	});
+  
+  //$('input:checkbox.cb-goods').change(function() {
+  $(document).on('change', ':checkbox.cb-goods', function () {
+    console.log("ya tut");
+    if(!$("#map").parent().hasClass("hidden"))
+    {
+      selectedGoods = $('input:checkbox:checked.cb-goods').map(function () 
+      { return this.value; }).get();
+      drawMap();      
+      
+    } 
+  });
+  
   
   $.getJSON('shops.json', function (json) {
     data = json;
@@ -177,22 +197,29 @@ $(document).ready(function(){
   
   function resizeContainer() {
     console.log("in resize");
+    var m = $(".app-area-wrapper").height();
     var l = $(".user-choice-area").height();
-    var r = $(".map-area").height() + $(".legend-area").height() + 5;
-    if(l<r) 
+    var r = $(".map-area").height() + $(".legend-area").height() + 40;
+    if(l>=m) 
     {
-      $(".app-area-wrapper").css("height", r);
-      $(".user-choice-area").css("height", r+5);
+      $(".app-area-wrapper").css("height", l+20+'px');
     }
-    else
+    m = $(".app-area-wrapper").height();
+    l = $(".user-choice-area").height();
+    if(m<=r) 
     {
-      $(".app-area-wrapper").css("height", l);
+      $(".app-area-wrapper").css("height", r+'px');
+      /*(".user-choice-area").css("height", r+5+'px');*/
     }
+    /*else
+    {
+      $(".app-area-wrapper").css("height", l+'px');
+    }*/
   }
   function resizeContainerWidth(k) {
     console.log("in resizeWidth");
-    var l = $(".user-choice-area").width() + k*map["width"] + 10;
-    $(".app-area-wrapper").css("width", l);
+    var l = $(".user-choice-area").width() + 10 + (k+2)*map["width"];
+    $(".app-area-wrapper").css("width", l+'px');
   }
   function getGoodNameById(id)
   {

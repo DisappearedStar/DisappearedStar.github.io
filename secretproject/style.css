@@ -1,9 +1,9 @@
 #wrapper
 {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-  padding: 10px;
-  /*border: 1px solid black;*/
+  /*padding: 10px;*/
+  border: 1px solid black;
 }
 #run
 {
@@ -58,16 +58,23 @@ h1,h2,h3,h4,h5,h6
 {
   display:inline-block;
   min-width:250px;
-  /*border: 1px solid black;*/
+  border: 1px solid black;
 }
 .goods-list
 {
   float:left;
-  /*background-color: #a6d8ec;*/
+  border: 1px solid black;
 }
 .my-list
 {
-  float:right;
+  float:left;
+  border: 1px solid black;
+}
+
+.clear-selection-button
+{
+  float:left;
+  border: 1px solid black;
 }
 
 .my-list:before
@@ -78,19 +85,24 @@ h1,h2,h3,h4,h5,h6
 {
   background-image: url(cart.png);
 }
+.clear-selection-button:before
+{
+  background-image: url(clear.png);
+}
 
-.my-list:hover, .goods-list:hover
+.my-list:hover, .goods-list:hover, .clear-selection-button:hover
 {
 	background-color: #bfe3f2;
 }
-.my-list, .goods-list
+.my-list, .goods-list, .clear-selection-button
 {
   padding:3px 9px 3px 3px;
   border-radius: 7px;
   cursor:pointer;
+  font-weight: bold;
 }
 
-.goods-list:before, .my-list:before
+.goods-list:before, .my-list:before, .clear-selection-button:before
 {
   content:"";
   background-repeat:no-repeat;
@@ -116,6 +128,7 @@ h1,h2,h3,h4,h5,h6
   cursor:pointer;
   vertical-align:middle;
 }
+
 .hidden
 {
   display:none;
@@ -123,10 +136,10 @@ h1,h2,h3,h4,h5,h6
 .app-area-wrapper
 {
   text-align: left;
-  width: 80%;
+  width: 75%;
+  min-width:270px;
   margin: 0 auto;
   background: #ddd;
-  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
   min-height:80vh;
@@ -136,19 +149,23 @@ h1,h2,h3,h4,h5,h6
 .user-choice-area
 {
   float: left;
-  min-width:250px;
-  /*border: 1px solid black;*/
+  /*min-width:250px;*/
+  margin:10px;
+  /*margin-right:0;*/
+  border: 1px solid black;
 }
 
 .map-area
 {
   float: right;
+  margin:10px;
+  /*margin-left:30px;*/
   /*width:79%;*/
 }
 
 .legend-area
 {
-  float: left;
+  float: right;
   /*border: 1px solid #636060;*/
   padding: 5px;
 }
