@@ -7,47 +7,47 @@
       {
         "Лента":
         {
-          "на Бердском шоссе": "lenta/berdskoe.json",
-          "на Большевистской": "lenta/bolshevist.json",
-          "на Гусинобродском шоссе": "lenta/gusinka.json",
-          "на Кирзаводской": "lenta/kirzavod.json",
-          "на Мясникова": "lenta/myasnikova.json",
-          "на Петухова": "lenta/petuhova.json",
-          "на Энергетиков": "lenta/energetikov.json"
+          "на Бердском шоссе": "berdskoe.json",
+          "на Большевистской": "bolshevist.json",
+          "на Гусинобродском шоссе": "gusinka.json",
+          "на Кирзаводской": "kirzavod.json",
+          "на Мясникова": "myasnikova.json",
+          "на Петухова": "petuhova.json",
+          "на Энергетиков": "energetikov.json"
         },
         "Ашан":
         {
-          "в МЕГА": "ashan/mega.json",
-          "в Голден Парке": "ashan/goldenpark.json",
-          "в Сибирском Молле": "ashan/sibmoll.json"
+          "в МЕГА": "mega.json",
+          "в Голден Парке": "goldenpark.json",
+          "в Сибирском Молле": "sibmoll.json"
         },
         "Гигант":
         {
-          "на Энергетиков": "gigant/energetikov.json",
-          "на Автогенной": "gigant/avtogennaya.json"
+          "на Энергетиков": "energetikov.json",
+          "на Автогенной": "avtogennaya.json"
         },
         "Окей":
         {
-          "в ТЦ «Малинка»": "okey/malinka.json",
-          "в ТРЦ «Аура»": "okey/aura.json"
+          "в ТЦ «Малинка»": "malinka.json",
+          "в ТРЦ «Аура»": "aura.json"
         },
         "Быстроном":
         {
-          "на Никитина": "bystronom/nikitina.json",
-          "на Островского": "bystronom/ostrovskogo.json",
-          "на Пермитина": "bystronom/permitina.json",
-          "на Степной": "bystronom/stepnaya.json",
-          "на Тюменской": "bystronom/tyumenskaya.json",
-          "на Линейной": "bystronom/lineynaya.json",
-          "в ТЦ Версаль": "bystronom/versal.json",
-          "на Немировича-Данченко": "bystronom/ndanchenko.json",
-          "на Инженерной": "bystronom/inzhenernaya.json"
+          "на Никитина": "nikitina.json",
+          "на Островского": "ostrovskogo.json",
+          "на Пермитина": "permitina.json",
+          "на Степной": "stepnaya.json",
+          "на Тюменской": "tyumenskaya.json",
+          "на Линейной": "lineynaya.json",
+          "в ТЦ Версаль": "versal.json",
+          "на Немировича-Данченко": "ndanchenko.json",
+          "на Инженерной": "inzhenernaya.json"
         },
         "Метро":
         {
-          "на Северном проезде": "metro/sevproezd.json",
-          "на Большевистской": "metro/bolshevist.json",
-          "на Северной": "metro/severnaya.json"
+          "на Северном проезде": "sevproezd.json",
+          "на Большевистской": "bolshevist.json",
+          "на Северной": "severnaya.json"
         }
       }
     },

@@ -149,9 +149,9 @@ $(document).ready(function(){
     $(".modal-result").fadeOut(600, function(){
       $(".modal-result").empty();
       $(".modal-submit").remove();
-      $(".margin-wrap").prev().empty();
+      $("#modal-input").empty();
       //$("#list-name-input").val('');
-      $('.modal').animate({opacity: 0, top: '45%'}, 200,	function()
+      $('.modal').animate({opacity: 0/*, top: '45%'*/}, 200,	function()
       {
         $(this).css('display', 'none');
         $('#overlay').fadeOut(400);
@@ -246,7 +246,8 @@ $(document).ready(function(){
   {
     var k = 30;
     var u = data.city[$("#city option:selected").text()].shops[$("#shop option:selected").text()][$("#address option:selected").text()];
-    
+    u = 'shops/' + $("#city option:selected").text() + '/' + $("#shop option:selected").text() + '/' + u;
+    console.log(u);
     var values = getCheckedGoodsIds();
     $.getJSON(u, function (json) {
       map = json;
@@ -331,7 +332,7 @@ $(document).ready(function(){
     if(type == "save")
     {
       $(".modal").attr('id', 'modal_form');
-      $("#modal_close").next().append('Введите название списка:<input id="list-name-input" type="text" size="20" maxlength="20">');
+      $("#modal-input").append('Введите название списка:<input id="list-name-input" type="text" size="18" maxlength="18">');
       $(".margin-wrap").prepend('<span class="modal-save modal-submit noselect">Сохранить</span>');
     }
     if(type == "load")
@@ -343,7 +344,7 @@ $(document).ready(function(){
         console.log("1234");
         names = $.parseJSON($.cookie("names"));
         console.log(names);
-        $("#modal_close").next().append('Выберите список:<br clear="all"><select size="1" id="my-saved-lists" name="my-saved-lists"></select><span id="lists-clear"></span>');
+        $("#modal-input").append('Выберите список:<br clear="all"><select size="1" id="my-saved-lists" name="my-saved-lists"></select><span id="lists-clear"></span>');
         $("#my-saved-lists").append($("<option />").val("").attr("selected", true).attr("disabled", true));
         names.map(function(name){
           $("#my-saved-lists").append($("<option />").val(name).text(name));
@@ -356,7 +357,7 @@ $(document).ready(function(){
         $(".modal-result").append('У вас нет списков').css("color", "red").fadeIn(500, modal_close);
       }
     }
-    $(".modal").css('display', 'block').animate({opacity: 1, top: '50%'}, 200);
+    $(".modal").css('display', 'block').animate({opacity: 1/*, top: '50%'*/}, 200);
   }
 })
 

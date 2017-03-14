@@ -218,34 +218,20 @@ h1,h2,h3,h4,h5,h6
   position:absolute;
 }
 
-
-#modal_form {/*
-	width: 250px; 
-	height: 120px;
-	margin-top: -60px;
-	margin-left: -125px;*/
-}
-#load_form {/*
-	width: 250px; 
-	height: 120px;
-	margin-top: -60px;
-	margin-left: -125px;*/
-}
 .modal
 {
+  border:1px solid black;
   border-radius: 10px;
-	background: #ddd;
+  box-shadow: 2px 2px 3px;
+	background: #eee;
 	position: fixed;
-	top: 45%;
-	left: 50%;
 	display: none;
 	opacity: 0;
 	z-index: 5;
 	padding: 10px;
   width: 200px; 
 	height: 120px;
-	margin-top: -60px;
-	margin-left: -125px
+	margin-top: 30px;
 }
 #modal_close {
 	width: 16px;
@@ -303,7 +289,10 @@ h1,h2,h3,h4,h5,h6
   width: 20px;
   height: 20px;
   vertical-align:bottom;
-  margin-left:5px;
+  margin-left:15px;
   display:inline-block;
   cursor:pointer;
+}
+#my-saved-lists{
+  margin-top:10px;
 }
