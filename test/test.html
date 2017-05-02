@@ -1,78 +1,268 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8"/>	
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.12/ua-parser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/swfobject/2.2/swfobject.min.js"></script>
-	<script> 
-    var fromFlash = {};
-    var plugin = null;
-    var ua = new UAParser();
-    if(ua.getOS()["name"] == "Windows")
-    {
-      switch(ua.getBrowser()["name"])
-      {
-        case "Chrome":
-        case "Opera":
-        case "Yandex":
-          plugin = "ppapi";
-          break;
-        case "Firefox":
-          plugin = "npapi";
-          break;
-        case "IE":
-          plugin = "activex";
-          break;
-        default:
-          plugin = "undefined";
-          break;
-      }
-    }
-    
-    function flashReady()
-    {
-      console.log("flashReady call");
-      var swf = document.getElementById("test");
-      swf.getCurrentSystemLanguage();
-      swf.getInstalledFlashVersion();
-      swf.getLatestFlashVersion(plugin);
-    }
-    function saveFromFlash(json)
-    {
-      
-      var parsed = $.parseJSON(json);
-      console.log(parsed);
-      //fromFlash[parsed[name]] = parsed[data];
-    }
 
-		var flashvars = {
-		};
-		var params = {
-			menu: "false",
-			scale: "noScale",
-			allowFullscreen: "false",
-			allowScriptAccess: "always",
-			bgcolor: "",
-			wmode: "direct" // can cause issues with FP settings & webcam
-		};
-		var attributes = {
-			id:"test",
-      style:"margin-left:-9999px;"
-		};
-		swfobject.embedSWF(
-			"test.swf", 
-			"altContent", "10%", "10%", "10.0.0", 
-			"expressInstall.swf", 
-			flashvars, params, attributes);
-	</script>
-	<style>
-		html, body { height:100%; overflow:hidden; }
-		body { margin:0; }
-	</style>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.12/ua-parser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swfobject/2.2/swfobject.min.js"></script>
+    <script>
+        var l18n = {
+            "ru": {
+                "os": "Операционная система: ",
+                "browser": "Браузер: ",
+                "flash": "Adobe Flash Player: ",
+                "flash_old": "устаревшая",
+                "flash_latest": "самая свежая версия",
+                "flash_update": "обновить",
+                "flash_unavailable": "недоступен (выключен или не установлен)",
+                "hasupport": "Поддержка аппаратного ускорения: ",
+                "ha1": "Всё поддерживается, галочки в настройках есть.",
+                "ha2": "Вы пользуетесь старой версией Flash Player. Обновите и попробуйте еще раз.",
+                "ha3": "Аппаратное ускорение не работает и ваша видеокарта не поддерживает эти графические опции. Но вы можете попробовать включить аппаратное ускорение в ограниченном режиме, обновив Flash Player.",
+                "ha4": "У вас включён встроенный PPAPI-плагин Flash Player. Всё должно быть в порядке.",
+                "ha5": "Необходимо обновить драйверы для видеокарты.",
+                "ha6": "Аппаратное ускорение у вас отключено. Включите и попробуйте еще раз.",
+                "ha7": "Видеокарта не поддерживает эти графические опции и аппаратное ускорение работает в ограниченном режиме.",
+                "ha8": "Старый и непроизводительный интегрированный видеоадаптер. Низкий или постоянно падающий FPS. Вероятно, аппаратное ускорение лучше отключить.",
+                "ha9": "Всё поддерживается, галочки в настройках есть, но FPS в игре низкий. Игра использует непроизводительный интегрированный адаптер вместо производительной видеокарты. Решается настройкой видеодрайвера для того, чтобы Flash Player или его контейнер (в Firefox — plugin-container.exe, в Chrome — chrome.exe) использовал производительную видеокарту вместо интегрированной."
+            },
+            "en": {
+                "os": "Operating system: ",
+                "browser": "Browser: ",
+                "flash": "Adobe Flash Player: ",
+                "flash_old": "outdated",
+                "flash_latest": "the latest version",
+                "flash_update": "update",
+                "flash_unavailable": "unavailable (turned off or not installed)",
+                "hasupport": "Hardware acceleration support: ",
+                "ha1": "Everything is supported, all the options are available in Settings!",
+                "ha2": "You use an old version of Flash player - update it and try again.",
+                "ha3": "Hardware acceleration doesn't work and your graphics card doesn't support those options. But you can try to turn on Hardware acceleration in limited mode, update Flash Player.",
+                "ha4": "The integrated PPAPI-flash plugin is turned on. Everything should be OK.",
+                "ha5": "You have to update your graphics card's drivers.",
+                "ha6": "Hardware acceleration turned off - enable it and try again.",
+                "ha7": "Your graphics card doesn't support those options and hardware acceleration works in limited mode.",
+                "ha8": "Old and not productive integrated video adapter. FPS is always low, or gets lowered. Probably the best is to disable Flash hardware acceleration.",
+                "ha9": "Everything is supported, nothing is missing from Settings, but the FPS is low. The game uses not productive integrated video adapter (for example, HD 4000), instead of productive one. Solution: Set your video driver so the Flash Player, or its container (plugin-container.exe in Firefox & chrome.exe in Chrome) uses productive graphics card instead of an integrated one."
+            }
+        }
+
+        var fromFlash = {};
+        fromFlash["latestFlashVersion"] = null;
+        var plugin = null;
+        var locale = null;
+        var ua = new UAParser();
+        if (ua.getOS()["name"] == "Windows") {
+            switch (ua.getBrowser()["name"]) {
+                case "Chrome":
+                case "Opera":
+                case "Yandex":
+                    //plugin = "ppapi";
+                    fromFlash["latestFlashVersion"] = getUrlParameter("latest_ppapi");
+                    break;
+                case "Firefox":
+                    //plugin = "npapi";
+                    fromFlash["latestFlashVersion"] = getUrlParameter("latest_npapi");
+                    break;
+                case "IE":
+                case "Edge":
+                    //plugin = "activex";
+                    fromFlash["latestFlashVersion"] = getUrlParameter("latest_activex");
+                    break;
+                default:
+                    //plugin = "undefined";
+                    fromFlash["latestFlashVersion"] = "undefined";
+                    break;
+            }
+        }
+
+        if (swfobject.getFlashPlayerVersion().major == 0) {
+            console.log("NOFLASH");
+            if (navigator.language.toLowerCase().indexOf("ru") != -1) {
+                fromFlash["currentSystemLanguage"] = "ru";
+            } else {
+                fromFlash["currentSystemLanguage"] = "en";
+            }
+            locale = fromFlash["currentSystemLanguage"];
+            fromFlash["installedFlashVersion"] = l18n[locale].flash_unavailable;
+            fillPage(false);
+        }
+
+        function flashReady() {
+            console.log("flashReady call");
+            var swf = document.getElementById("test");
+            swf.getCurrentSystemLanguage();
+            swf.getInstalledFlashVersion();
+            //swf.getLatestFlashVersion(plugin);
+            //console.log(getUrlParameter("latest"));
+            fillPage(true);
+        }
+
+        function flashCompare() {
+            if (fromFlash["latestFlashVersion"] == "undefined") return "";
+            var installed = fromFlash["installedFlashVersion"].split('.');
+            var latest = fromFlash["latestFlashVersion"].split('.');
+            for (var i = 0; i < 4; i++) {
+                if (installed[i] < latest[i]) {
+                    return '(' + l18n[locale].flash_old + ', <a href="https://get.adobe.com/flashplayer/">' + l18n[locale].flash_update + '</a>)';
+                }
+            }
+            return '(' + l18n[locale].flash_latest + ')';
+        }
+
+        function haSupportResult() {
+            var ha = fromFlash["haSupport"];
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == true &&
+                ha.constrainedSupported == true &&
+                ha.baselineDriverInfo == "DirectX9" &&
+                ha.constrainedDriverInfo == "DirectX9 (Baseline Constrained)") {
+                return l18n[locale].ha1;
+            }
+            if (ha.mode == "old" &&
+                ha.baselineSupported == true &&
+                ha.renderMode == "DirectX9 (Direct blitting)") {
+                return l18n[locale].ha2;
+            }
+            if (ha.mode == "old" &&
+                ha.baselineSupported == false &&
+                ha.renderMode == "Software (Direct blitting)") {
+                return l18n[locale].ha3;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == true &&
+                ha.constrainedSupported == true &&
+                ha.baselineDriverInfo == "OpenGL" &&
+                ha.constrainedDriverInfo == "OpenGL (Baseline Constrained)") {
+                return l18n[locale].ha4;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == false &&
+                ha.constrainedSupported == false &&
+                ha.baselineDriverInfo == "Software Hw_disabled=oldDriver" &&
+                ha.constrainedDriverInfo == "Software Hw_disabled=oldDriver (Baseline Constrained)") {
+                return l18n[locale].ha5;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == false &&
+                ha.constrainedSupported == false &&
+                ha.baselineDriverInfo == "Software Hw_disabled=userDisabled" &&
+                ha.constrainedDriverInfo == "Software Hw_disabled=userDisabled (Baseline Constrained)") {
+                return l18n[locale].ha6;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == false &&
+                ha.constrainedSupported == true &&
+                ha.baselineDriverInfo == "Software Hw_disabled=unavailable" &&
+                ha.constrainedDriverInfo == "OpenGL (Baseline Constrained)") {
+                return l18n[locale].ha7;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == false &&
+                ha.constrainedSupported == true &&
+                ha.baselineDriverInfo == "Software Hw_disabled=unavaiable" &&
+                ha.constrainedDriverInfo == "DirectX9Ex (Baseline Constrained)") {
+                return l18n[locale].ha8;
+            }
+            if (ha.mode == "normal" &&
+                ha.baselineSupported == true &&
+                ha.constrainedSupported == true &&
+                ha.baselineDriverInfo == "DirectX9Ex" &&
+                ha.constrainedDriverInfo == "DirectX9Ex (Baseline Constrained)") {
+                return l18n[locale].ha9;
+            }
+        }
+
+        function fillPage(flag) {
+            /* if ($.isReady) {
+                 console.log("1");
+                 insertData(flag);
+             } else {*/
+            //console.log("2");
+            $(document).ready(insertData(flag));
+            //}
+        }
+
+        function insertData(flag) {
+            return function() {
+                if (flag) {
+                    if (fromFlash["currentSystemLanguage"] == "ru") {
+                        locale = "ru";
+                    } else {
+                        locale = "en";
+                    }
+                    $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"] + " " + flashCompare());
+                    $("#hasupport").append(l18n[locale].hasupport).append(haSupportResult());
+                } else {
+                    $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"]);
+                }
+                $("#os").append(l18n[locale].os).append(ua.getOS().name + " " + ua.getOS().version);
+                $("#browser").append(l18n[locale].browser).append(ua.getBrowser().name + " " + ua.getBrowser().version);
+            }
+        }
+
+        function saveFromFlash(json) {
+
+            var parsed = $.parseJSON(json);
+            fromFlash[parsed["name"]] = parsed["data"];
+        }
+
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+        var flashvars = {};
+        var params = {
+            menu: "false",
+            scale: "noScale",
+            allowFullscreen: "false",
+            allowScriptAccess: "always",
+            bgcolor: "",
+            wmode: "direct" // can cause issues with FP settings & webcam
+        };
+        var attributes = {
+            id: "test",
+            //style:"margin-left:-9999px;"
+        };
+        swfobject.embedSWF(
+            "test.swf",
+            "altContent", "10%", "10%", "10.0.0",
+            "expressInstall.swf",
+            flashvars, params, attributes);
+    </script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0
+        }
+    </style>
 </head>
+
 <body>
-	<div id="altContent"></div>
-  <div id="res"></div>
+    <div id="res">
+        <div id="os"></div>
+        <div id="browser"></div>
+        <div id="flash"></div>
+        <div id="hasupport"></div>
+    </div>
+    <div id="altContent"></div>
 </body>
+
 </html>

@@ -1,8 +1,0 @@
-<cross-domain-policy>
-        <site-control permitted-cross-domain-policies="by-content-type"/>
-        <allow-access-from domain="helpx.adobe.com" secure="false" />
-        <allow-access-from domain="helpx-internal.qa.corp.adobe.com" secure="false" />
-        <allow-access-from domain="helpx.stage.adobe.com" secure="false" />
-        <allow-access-from domain="www.adobe.com" secure="false" />
-        <allow-access-from domain="www.stage.adobe.com" secure="false" />
-</cross-domain-policy>
