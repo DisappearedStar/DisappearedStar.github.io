@@ -46,11 +46,10 @@
                 "ha8": "Old and not productive integrated video adapter. FPS is always low, or gets lowered. Probably the best is to disable Flash hardware acceleration.",
                 "ha9": "Everything is supported, nothing is missing from Settings, but the FPS is low. The game uses not productive integrated video adapter (for example, HD 4000), instead of productive one. Solution: Set your video driver so the Flash Player, or its container (plugin-container.exe in Firefox & chrome.exe in Chrome) uses productive graphics card instead of an integrated one."
             }
-        }
+        };
 
         var fromFlash = {};
         fromFlash["latestFlashVersion"] = null;
-        var plugin = null;
         var locale = null;
         var ua = new UAParser();
         if (ua.getOS()["name"] == "Windows") {
@@ -73,7 +72,7 @@
             }
         }
 
-        if (swfobject.getFlashPlayerVersion().major == 0) {
+        if (swfobject.getFlashPlayerVersion().major === 0) {
             if (navigator.language.toLowerCase().indexOf("ru") != -1) {
                 fromFlash["currentSystemLanguage"] = "ru";
             } else {
@@ -106,60 +105,60 @@
         function haSupportResult() {
             var ha = fromFlash["haSupport"];
             if (ha.mode == "normal" &&
-                ha.baselineSupported == true &&
-                ha.constrainedSupported == true &&
+                ha.baselineSupported === true &&
+                ha.constrainedSupported === true &&
                 ha.baselineDriverInfo == "DirectX9" &&
                 ha.constrainedDriverInfo == "DirectX9 (Baseline Constrained)") {
                 return l18n[locale].ha1;
             }
             if (ha.mode == "old" &&
-                ha.baselineSupported == true &&
+                ha.baselineSupported === true &&
                 ha.renderMode == "DirectX9 (Direct blitting)") {
                 return l18n[locale].ha2;
             }
             if (ha.mode == "old" &&
-                ha.baselineSupported == false &&
+                ha.baselineSupported === false &&
                 ha.renderMode == "Software (Direct blitting)") {
                 return l18n[locale].ha3;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == true &&
-                ha.constrainedSupported == true &&
+                ha.baselineSupported === true &&
+                ha.constrainedSupported === true &&
                 ha.baselineDriverInfo == "OpenGL" &&
                 ha.constrainedDriverInfo == "OpenGL (Baseline Constrained)") {
                 return l18n[locale].ha4;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == false &&
-                ha.constrainedSupported == false &&
+                ha.baselineSupported === false &&
+                ha.constrainedSupported === false &&
                 ha.baselineDriverInfo == "Software Hw_disabled=oldDriver" &&
                 ha.constrainedDriverInfo == "Software Hw_disabled=oldDriver (Baseline Constrained)") {
                 return l18n[locale].ha5;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == false &&
-                ha.constrainedSupported == false &&
+                ha.baselineSupported === false &&
+                ha.constrainedSupported === false &&
                 ha.baselineDriverInfo == "Software Hw_disabled=userDisabled" &&
                 ha.constrainedDriverInfo == "Software Hw_disabled=userDisabled (Baseline Constrained)") {
                 return l18n[locale].ha6;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == false &&
-                ha.constrainedSupported == true &&
+                ha.baselineSupported === false &&
+                ha.constrainedSupported === true &&
                 ha.baselineDriverInfo == "Software Hw_disabled=unavailable" &&
                 ha.constrainedDriverInfo == "OpenGL (Baseline Constrained)") {
                 return l18n[locale].ha7;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == false &&
-                ha.constrainedSupported == true &&
+                ha.baselineSupported === false &&
+                ha.constrainedSupported === true &&
                 ha.baselineDriverInfo == "Software Hw_disabled=unavaiable" &&
                 ha.constrainedDriverInfo == "DirectX9Ex (Baseline Constrained)") {
                 return l18n[locale].ha8;
             }
             if (ha.mode == "normal" &&
-                ha.baselineSupported == true &&
-                ha.constrainedSupported == true &&
+                ha.baselineSupported === true &&
+                ha.constrainedSupported === true &&
                 ha.baselineDriverInfo == "DirectX9Ex" &&
                 ha.constrainedDriverInfo == "DirectX9Ex (Baseline Constrained)") {
                 return l18n[locale].ha9;
@@ -186,7 +185,7 @@
                 }
                 $("#os").append(l18n[locale].os).append(ua.getOS().name + " " + ua.getOS().version);
                 $("#browser").append(l18n[locale].browser).append(ua.getBrowser().name + " " + ua.getBrowser().version);
-            }
+            };
         }
 
         function saveFromFlash(json) {
@@ -207,7 +206,7 @@
                     return sParameterName[1] === undefined ? true : sParameterName[1];
                 }
             }
-        };
+        }
 
         var flashvars = {};
         var params = {
@@ -222,11 +221,7 @@
             id: "test"
                 //style:"margin-left:-9999px;"
         };
-        swfobject.embedSWF(
-            "test.swf",
-            "altContent", "10%", "10%", "10.0.0",
-            "expressInstall.swf",
-            flashvars, params, attributes);
+        swfobject.embedSWF("test.swf", "altContent", "10%", "10%", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
     </script>
     <style>
         html,
