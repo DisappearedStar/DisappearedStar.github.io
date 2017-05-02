@@ -187,6 +187,7 @@
         function insertData(flag) {
             return function() {
                 if (flag) {
+                    console.log("2");
                     if (fromFlash["currentSystemLanguage"] == "ru") {
                         locale = "ru";
                     } else {
@@ -195,8 +196,10 @@
                     $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"] + " " + flashCompare());
                     $("#hasupport").append(l18n[locale].hasupport).append(haSupportResult());
                 } else {
+                    console.log("3");
                     $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"]);
                 }
+                console.log("4");
                 $("#os").append(l18n[locale].os).append(ua.getOS().name + " " + ua.getOS().version);
                 $("#browser").append(l18n[locale].browser).append(ua.getBrowser().name + " " + ua.getBrowser().version);
             }
