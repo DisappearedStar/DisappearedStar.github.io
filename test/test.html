@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>	
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.12/ua-parser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swfobject/2.2/swfobject.min.js"></script>
+	<script> 
+    var fromFlash = {};
+    var plugin = null;
+    var ua = new UAParser();
+    if(ua.getOS()["name"] == "Windows")
+    {
+      switch(ua.getBrowser()["name"])
+      {
+        case "Chrome":
+        case "Opera":
+        case "Yandex":
+          plugin = "ppapi";
+          break;
+        case "Firefox":
+          plugin = "npapi";
+          break;
+        case "IE":
+          plugin = "activex";
+          break;
+        default:
+          plugin = "undefined";
+          break;
+      }
+    }
+    
+    function flashReady()
+    {
+      console.log("flashReady call");
+      var swf = document.getElementById("test");
+      swf.getCurrentSystemLanguage();
+      swf.getInstalledFlashVersion();
+      swf.getLatestFlashVersion(plugin);
+    }
+    function saveFromFlash(json)
+    {
+      
+      var parsed = $.parseJSON(json);
+      console.log(parsed);
+      //fromFlash[parsed[name]] = parsed[data];
+    }
+
+		var flashvars = {
+		};
+		var params = {
+			menu: "false",
+			scale: "noScale",
+			allowFullscreen: "false",
+			allowScriptAccess: "always",
+			bgcolor: "",
+			wmode: "direct" // can cause issues with FP settings & webcam
+		};
+		var attributes = {
+			id:"test",
+      style:"margin-left:-9999px;"
+		};
+		swfobject.embedSWF(
+			"test.swf", 
+			"altContent", "10%", "10%", "10.0.0", 
+			"expressInstall.swf", 
+			flashvars, params, attributes);
+	</script>
+	<style>
+		html, body { height:100%; overflow:hidden; }
+		body { margin:0; }
+	</style>
+</head>
+<body>
+	<div id="altContent"></div>
+  <div id="res"></div>
+</body>
+</html>

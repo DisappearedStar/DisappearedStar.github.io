@@ -89,6 +89,11 @@ $(document).ready(function(){
         //$('#modal_form').css('display', 'block').animate({opacity: 1, top: '50%'}, 200);
       });
 	});
+
+  $(document).on('click', '.report-button', function () {
+    console.log("valim");
+    document.location='feedback/index.php';
+	});
   
   $(document).on('click', '#lists-clear', function () {
     if($.cookie("names"))
