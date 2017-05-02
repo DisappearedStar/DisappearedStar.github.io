@@ -58,26 +58,22 @@
                 case "Chrome":
                 case "Opera":
                 case "Yandex":
-                    //plugin = "ppapi";
                     fromFlash["latestFlashVersion"] = getUrlParameter("latest_ppapi");
                     break;
                 case "Firefox":
-                    //plugin = "npapi";
                     fromFlash["latestFlashVersion"] = getUrlParameter("latest_npapi");
                     break;
                 case "IE":
                 case "Edge":
-                    //plugin = "activex";
                     fromFlash["latestFlashVersion"] = getUrlParameter("latest_activex");
                     break;
                 default:
-                    //plugin = "undefined";
                     fromFlash["latestFlashVersion"] = "undefined";
                     break;
             }
         }
 
-        if (swfobject.getFlashPlayerVersion().major == 0 || $("#test").prop("title") != "") {
+        if (swfobject.getFlashPlayerVersion().major == 0) {
             if (navigator.language.toLowerCase().indexOf("ru") != -1) {
                 fromFlash["currentSystemLanguage"] = "ru";
             } else {
@@ -89,12 +85,9 @@
         }
 
         function flashReady() {
-            console.log("flashReady call");
             var swf = document.getElementById("test");
             swf.getCurrentSystemLanguage();
             swf.getInstalledFlashVersion();
-            //swf.getLatestFlashVersion(plugin);
-            //console.log(getUrlParameter("latest"));
             fillPage(true);
         }
 
@@ -174,32 +167,23 @@
         }
 
         function fillPage(flag) {
-            /* if ($.isReady) {
-                 console.log("1");
-                 insertData(flag);
-             } else {*/
-            //console.log("2");
             $(document).ready(insertData(flag));
-            //}
         }
 
         function insertData(flag) {
             return function() {
+                $('#res div').html('');
                 if (flag) {
-                    console.log("2");
                     if (fromFlash["currentSystemLanguage"] == "ru") {
                         locale = "ru";
                     } else {
                         locale = "en";
                     }
-                    console.log("5");
                     $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"] + " " + flashCompare());
                     $("#hasupport").append(l18n[locale].hasupport).append(haSupportResult());
                 } else {
-                    console.log("3");
                     $("#flash").append(l18n[locale].flash).append(fromFlash["installedFlashVersion"]);
                 }
-                console.log("4");
                 $("#os").append(l18n[locale].os).append(ua.getOS().name + " " + ua.getOS().version);
                 $("#browser").append(l18n[locale].browser).append(ua.getBrowser().name + " " + ua.getBrowser().version);
             }
